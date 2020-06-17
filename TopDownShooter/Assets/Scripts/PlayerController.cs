@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rigidbody;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
         position.x += speed * Time.deltaTime * Input.GetAxis("Horizontal");
         position.y += speed * Time.deltaTime * Input.GetAxis("Vertical");
 
+        /*if (Input.GetButtonDown("w"))
+        {
+            anim.SetTrigger("Walking");
+        }*/
         rigidbody.MovePosition(position);
     }
 }
