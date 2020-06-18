@@ -12,6 +12,8 @@ public class EnemyAi : MonoBehaviour
     public Transform waypoint2;
     public float range = 1;
     public LayerMask mask;
+    public GameObject eBullet;
+    public Transform player;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,6 @@ public class EnemyAi : MonoBehaviour
         {
             Vector2 nextPosition = Vector2.MoveTowards(transform.position, nextWaypoint.position, Time.deltaTime);
             transform.position = nextPosition;
-            //transform.up = transform.position - ((Vector3)nextPosition);
             if(transform.position == nextWaypoint.position)
             {
                 if(nextWaypoint == waypoint1)
@@ -44,15 +45,21 @@ public class EnemyAi : MonoBehaviour
         }
         else if(currentState == "attack")
         {
-
             if (!TargetAquired())
             {
                 currentState = "patrol";
             }
+            ShootPlayer();
         }
         
     }
-
+    void ShootPlayer()
+    {
+        Vector2 pVector = player.position + transform.position;
+        GameObject movingEBullet = Instantiate(eBullet, transform.position, transform.rotation);
+        Rigidbody2D rigidBody = movingEBullet.GetComponent<Rigidbody2D>();
+        rigidBody.MovePosition(pVector);
+    }
     bool TargetAquired()
     {
         GameObject targetGo = GameObject.FindGameObjectWithTag("Player");
