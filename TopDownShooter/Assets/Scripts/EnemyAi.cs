@@ -13,7 +13,8 @@ public class EnemyAi : MonoBehaviour
     public float range = 1;
     public LayerMask mask;
     public GameObject eBullet;
-    public Transform player;
+    public GameObject player;
+    public float shotCooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,16 +50,20 @@ public class EnemyAi : MonoBehaviour
             {
                 currentState = "patrol";
             }
-            ShootPlayer();
+            shotCooldown -= Time.deltaTime;
+            if (shotCooldown <= 0)
+            {
+                ShootPlayer();
+                shotCooldown = 1;
+            }
+            
         }
         
     }
     void ShootPlayer()
     {
-        Vector2 pVector = player.position + transform.position;
         GameObject movingEBullet = Instantiate(eBullet, transform.position, transform.rotation);
-        Rigidbody2D rigidBody = movingEBullet.GetComponent<Rigidbody2D>();
-        rigidBody.MovePosition(pVector);
+        movingEBullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * speed;
     }
     bool TargetAquired()
     {
