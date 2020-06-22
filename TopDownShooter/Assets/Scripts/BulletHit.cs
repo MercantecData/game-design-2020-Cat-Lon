@@ -17,7 +17,7 @@ public class BulletHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "Player" && other.tag != "Walls")
+        if (other.tag != "Player" && other.tag != "Walls" && other.tag != "Bullet")
         {
             Destroy(gameObject);
             Destroy(other.gameObject);

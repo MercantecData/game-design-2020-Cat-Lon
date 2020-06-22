@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4704058340864530351}
   m_Layer: 11
   m_Name: eBullet
-  m_TagString: Enemy
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d40ba8eb6694a478a6205b91103c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5896022843206957448, guid: 211c7bab5de1aa24b8870c09512c4241, type: 3}
-  playerPos: {x: 0, y: 0}
 --- !u!212 &1392922380443202573
 SpriteRenderer:
   m_ObjectHideFlags: 0
