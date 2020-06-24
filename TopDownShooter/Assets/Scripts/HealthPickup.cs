@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletHit : MonoBehaviour
+public class HealthPickup : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,15 +17,11 @@ public class BulletHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "Player" && other.tag != "Walls" && other.tag != "Bullet" && other.tag != "Pickup")
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player != null)
         {
+            player.ChangeHealth(1);
             Destroy(gameObject);
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "Walls")
-        {
-            Destroy(this.gameObject);
         }
     }
 }

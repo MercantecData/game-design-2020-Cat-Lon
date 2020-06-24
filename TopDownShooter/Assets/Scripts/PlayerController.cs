@@ -12,12 +12,17 @@ public class PlayerController : MonoBehaviour
     public float maxHealth = 5f;
     public GameObject endText;
     public Text uiText;
+    public Text healthUi;
+    private float score;
+    public Text scoreText;
     // Start is called before the first frame update
     void Start()
     {
         playerBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
+        healthUi.text = "Health: " + currentHealth + "/" + maxHealth;
+        scoreText.text = "Score: " + score;
     }
 
     // Update is called once per frame
@@ -49,7 +54,15 @@ public class PlayerController : MonoBehaviour
     public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        print("current: " + currentHealth + " max health: " + maxHealth);
-        anim.SetTrigger("Hurt");
+        if(amount < 0) 
+        {
+            anim.SetTrigger("Hurt");
+        }
+        healthUi.text = "Health: " + currentHealth + "/" + maxHealth;
+    }
+    public void ScoreChange(float amount)
+    {
+        score += amount;
+        scoreText.text = "Score: " + score; 
     }
 }
