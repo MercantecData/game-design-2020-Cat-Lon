@@ -16,11 +16,15 @@ public class Tracking : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        var playerPosition = player.position;
-        playerPosition.z = transform.position.z;
+        if(player != null) 
+        {
+            var playerPosition = player.position;
+            playerPosition.z = transform.position.z;
 
-        var target = Vector3.SmoothDamp(transform.position, playerPosition, ref velocity, 0.5f);
+            var target = Vector3.SmoothDamp(transform.position, playerPosition, ref velocity, 0.5f);
 
-        transform.position = target;
+            transform.position = target;
+        }
+        
     }
 }
