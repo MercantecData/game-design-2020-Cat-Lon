@@ -19,7 +19,7 @@ public class ChaseEnemy : MonoBehaviour
     {
         if (TargetAquired())
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * speed;
+                gameObject.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * speed;
         }
     }
     bool TargetAquired()
@@ -28,16 +28,15 @@ public class ChaseEnemy : MonoBehaviour
         bool inRange = false;
         bool inVision = false;
         if (Vector2.Distance(targetGo.transform.position, transform.position) < range)
-        {
-            inRange = true;
-        }
+            {
+                inRange = true;
+            }
         var lineCast = Physics2D.Linecast(transform.position, targetGo.transform.position, mask);
+        
         if (lineCast.transform == null)
-        {
-            inVision = true;
-
-        }
-
+           {
+              inVision = true;
+           }
         return inRange && inVision;
     }
     private void OnTriggerEnter2D(Collider2D other)

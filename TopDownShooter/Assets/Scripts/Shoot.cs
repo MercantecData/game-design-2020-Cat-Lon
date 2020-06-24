@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    public GameObject gameObject;
+    public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +16,7 @@ public class Shoot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) 
         {
-            GameObject bBullet =  Instantiate(gameObject, transform.position, transform.rotation);
+            GameObject bBullet =  Instantiate(bullet, transform.position, transform.rotation);
             Rigidbody2D rigidBody = bBullet.GetComponent<Rigidbody2D>();
             rigidBody.velocity = bBullet.transform.right * 10;
 

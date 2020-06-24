@@ -17,10 +17,11 @@ public class EBulletHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "Enemy" && other.tag != "Walls" && other.tag != "Bullet")
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (other.tag == "Player")
         {
+            player.ChangeHealth(-1);
             Destroy(gameObject);
-            Destroy(other.gameObject);
         }
         else if (other.tag == "Walls")
         {

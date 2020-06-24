@@ -67,20 +67,27 @@ public class EnemyAi : MonoBehaviour
     }
     bool TargetAquired()
     {
-        GameObject targetGo = GameObject.FindGameObjectWithTag("Player");
-        bool inRange = false;
-        bool inVision = false;
-        if(Vector2.Distance(targetGo.transform.position, transform.position) < range)
+        if (player != null)
         {
-            inRange = true;
+            GameObject targetGo = GameObject.FindGameObjectWithTag("Player");
+            bool inRange = false;
+            bool inVision = false;
+            if (Vector2.Distance(targetGo.transform.position, transform.position) < range)
+            {
+                inRange = true;
+            }
+            var lineCast = Physics2D.Linecast(transform.position, targetGo.transform.position, mask);
+            if (lineCast.transform == null)
+            {
+                inVision = true;
+
+            }
+
+            return inRange && inVision;
         }
-        var lineCast = Physics2D.Linecast(transform.position, targetGo.transform.position, mask);
-        if (lineCast.transform == null)
+        else
         {
-            inVision = true;
-
+            return false;
         }
-
-        return inRange && inVision;
     }
 }
