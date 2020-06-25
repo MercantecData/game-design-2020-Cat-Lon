@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Text healthUi;
     private float score;
     public Text scoreText;
+    public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,14 +44,6 @@ public class PlayerController : MonoBehaviour
         }
         playerBody.MovePosition(position);
 
-        if(currentHealth <= 0f)
-        {
-            string deathText = "You Died!";
-            uiText.text = deathText;
-            Destroy(gameObject);
-            endText.SetActive(true);
-            Time.timeScale = 0;
-        }
     }
     public void ChangeHealth(int amount)
     {
@@ -59,6 +53,14 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Hurt");
         }
         healthUi.text = "Health: " + currentHealth + "/" + maxHealth;
+        if (currentHealth <= 0f)
+        {
+            string deathText = "You Died!";
+            uiText.text = deathText;
+            endText.SetActive(true);
+            AudioSource.PlayClipAtPoint(clip, Vector2.zero);
+            Destroy(gameObject);
+        }
     }
     public void ScoreChange(float amount)
     {

@@ -7,6 +7,7 @@ public class Escape : MonoBehaviour
 {
     public GameObject winText;
     public Text endText;
+    public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class Escape : MonoBehaviour
         if(collision.tag == "Player")
         {
             winText.SetActive(true);
+            AudioSource.PlayClipAtPoint(clip, Vector2.zero);
             Time.timeScale = 0;
         }
     }
