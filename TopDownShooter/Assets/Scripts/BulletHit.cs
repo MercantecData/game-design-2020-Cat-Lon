@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletHit : MonoBehaviour
 {
+    public GameObject pickup;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class BulletHit : MonoBehaviour
     {
         if (other.tag != "Player" && other.tag != "Walls" && other.tag != "Bullet" && other.tag != "Pickup")
         {
+            GameObject gemPickup = Instantiate(pickup, transform.position, other.transform.rotation);
             Destroy(gameObject);
             Destroy(other.gameObject);
         }
