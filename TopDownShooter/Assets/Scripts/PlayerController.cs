@@ -6,25 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    public GameObject endText;
+    
     private Rigidbody2D playerBody;
     private Animator anim;
-    private float currentHealth;
-    public float maxHealth = 5f;
-    public GameObject endText;
+    
+    public int maxHealth = 5;
+    public float speed;
+    public int currentHealth;
+
     public Text uiText;
     public Text healthUi;
-    private float score;
     public Text scoreText;
+    
     public AudioClip clip;
+    public float playerScore;
     // Start is called before the first frame update
     void Start()
     {
         playerBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
+        
+        playerScore = PlayerManager.Instance.storedScore;
+        currentHealth = PlayerManager.Instance.storedHealth;
         healthUi.text = "Health: " + currentHealth + "/" + maxHealth;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + playerScore;
     }
 
     // Update is called once per frame
@@ -64,7 +71,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ScoreChange(float amount)
     {
-        score += amount;
-        scoreText.text = "Score: " + score; 
+        playerScore += amount;
+        scoreText.text = "Score: " + playerScore; 
     }
 }

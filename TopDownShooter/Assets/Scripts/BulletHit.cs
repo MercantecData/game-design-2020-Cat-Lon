@@ -18,7 +18,7 @@ public class BulletHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "Player" && other.tag != "Walls" && other.tag != "Bullet" && other.tag != "Pickup")
+        if (other.tag == "Enemy")
         {
             GameObject gemPickup = Instantiate(pickup, transform.position, other.transform.rotation);
             Destroy(gameObject);
