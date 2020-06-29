@@ -27,7 +27,7 @@ public class BulletHit : MonoBehaviour
 
         if (other.tag == "Walls")
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }
